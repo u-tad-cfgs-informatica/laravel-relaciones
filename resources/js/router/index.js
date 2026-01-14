@@ -6,6 +6,8 @@ import DashboardLayout from '../layouts/DashboardLayout.vue'
 
 import Home from '../views/Home.vue'
 import Users from '../views/Users.vue'
+import UserDetail from '../views/UserDetail.vue'
+import UserEdit from '../views/UserEdit.vue'
 import Profiles from '../views/Profiles.vue'
 import Posts from '../views/Posts.vue'
 import Categories from '../views/Categories.vue'
@@ -25,6 +27,8 @@ const routes = [
             { path: 'posts', component: Posts, meta: { title: 'Posts' } },
             { path: 'categories', component: Categories, meta: { title: 'Categories' } },
             { path: 'tags', component: Tags, meta: { title: 'Tags' } },
+            { path: 'users/:id', component: UserDetail, meta: { title: 'User detail' } },
+            { path: 'users/:id/edit', component: UserEdit, meta: { title: 'Edit user' } },
         ],
     },
 ]

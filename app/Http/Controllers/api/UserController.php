@@ -14,13 +14,24 @@ class UserController extends Controller
 {
     public function index(Request $request)
     {
-        // Si quieres paginación:
-        $users = User::query()
-            ->orderByDesc('id')
-            ->paginate(15);
+        $n = $request->integer('per_page', 15);
+
+        $q = User::query();
+
+        if ($search = $request->query('search')) {
+            $search = trim($search);
+
+            $q->where(function ($w) use ($search) {
+                $w->where('name', 'like', "%{$search}%")
+                    ->orWhere('email', 'like', "%{$search}%");
+            });
+        }
+
+        $users = $q->orderByDesc('id')->paginate($n);
 
         return UserResource::collection($users);
     }
+
 
     public function store(StoreUserRequest $request)
     {
